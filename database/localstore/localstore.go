@@ -42,6 +42,16 @@ func (l *localstore) FetchHabitTrack(habitID int) (*entity.HabitTrack, error) {
 	return &entity.HabitTrack{Habit: *habit, Tracks: tracks}, nil
 }
 
+func (l *localstore) FetchHabits() ([]*entity.Habit, error) {
+	resp := make([]*entity.Habit, len(habits))
+	count := 0
+	for _, habit := range habits {
+		resp[count] = &habit
+		count++
+	}
+	return resp, nil
+}
+
 func getHabit(habitID int) *entity.Habit {
 	habit := habits[habitID]
 	return &habit

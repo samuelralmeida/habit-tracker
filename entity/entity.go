@@ -2,13 +2,14 @@ package entity
 
 import "time"
 
-type frequency string
+type frequency struct {
+	Option      int
+	Description string
+}
 
-const (
-	Monthly frequency = "monthly"
-	Weekly  frequency = "weekly"
-	Daily   frequency = "daily"
-)
+func (f *frequency) IsValidFrequency() bool {
+	return f.Description != ""
+}
 
 type Tracks []time.Time
 
@@ -26,4 +27,18 @@ func (h *Habit) IsValidHabit() bool {
 type HabitTrack struct {
 	Habit
 	Tracks
+}
+
+var frequencies = map[int]frequency{
+	0: {Option: 0, Description: "daily"},
+	1: {Option: 1, Description: "weekly"},
+	2: {Option: 2, Description: "monthly"},
+}
+
+func OptionsFrequency() []frequency {
+	return []frequency{frequencies[0], frequencies[1], frequencies[2]}
+}
+
+func ParseFrequency(option int) frequency {
+	return frequencies[option]
 }
