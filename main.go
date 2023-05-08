@@ -11,7 +11,7 @@ func main() {
 
 	database := localstore.New()
 
-	err := database.SaveHabit(&entity.Habit{ID: 22, Description: "Estudar inglês 30 minutos", WeekFrequencyGoal: 7})
+	err := database.SaveHabit(&entity.Habit{ID: 22, Description: "Estudar inglês 30 minutos", Frequency: entity.Daily, FrequencyGoal: 1})
 	fmt.Println(err)
 
 	h, err := database.FetchHabitTrack(18)
